@@ -6,7 +6,6 @@ const { HOST_DB, PORT = 3000 } = process.env;
 
 const main = async () => {
   try {
-    console.log(HOST_DB); // This will print the value of HOST_DB
     if (!HOST_DB) {
       throw new Error("HOST_DB not set!");
     }

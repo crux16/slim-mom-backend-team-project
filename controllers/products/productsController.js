@@ -21,6 +21,8 @@ const getDailyRateUserController = async (req, res) => {
     return res.status(200).json({ data: user.infouser });
 };
 
+
+// Get all products by query
 const getAllProductsByQuery = async (req, res, next) => {
   const { query: { title, limit = 10 } } = req;
   const titleFromUrl = decodeURI(title).trim();
