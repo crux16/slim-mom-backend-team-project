@@ -7,4 +7,4 @@ const calculateDailyRate = ({ currentWeight, height, age, desiredWeight }) => {
     );
 };
 
-export default calculateDailyRate;
+module.exports = calculateDailyRate;

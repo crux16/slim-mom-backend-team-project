@@ -7,8 +7,9 @@ const productSchema = new Schema({
         required: true, 
     },
     title: {
-        ru: { type: String, required: true },
-        ua: { type: String, required: true },
+        type: String,
+        required: true,
+        index: 'text', // Define text index on 'title' field
     },
     calories: {
         type: Number,
@@ -22,7 +23,7 @@ const productSchema = new Schema({
     },
 });
 
-const Product = model("products", productSchema);
+const Product = model("product", productSchema);
 
 module.exports = {
     Product,

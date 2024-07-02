@@ -7,13 +7,12 @@ dotenv.config();
 mongoose.set("strictQuery", false);
 
 const authRouter = require("./routes/api/authRouter");
-// const productsRouter = require("./routes/api/productsRouter");
-// const myProductsRouter = require("./routes/api/myProductsRouter");
-// const googleAuthRouter = require("./routes/api/authGoogleRouter");
+const productsRouter = require("./routes/api/productsRouter");
+const myProductsRouter = require("./routes/api/myProductsRouter");
 
 const app = express();
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require('./swagger.json');
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDocument = require('./swagger.json');
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -22,10 +21,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", authRouter);
-// app.use("/api/products", productsRouter);
-// app.use("/api/myProducts", myProductsRouter);
-// app.use("/api/auth", googleAuthRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/products", productsRouter);
+app.use("/api/myProducts", myProductsRouter);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 app.use((_, res) => res.status(404).json({ message: "Not Found" }));
