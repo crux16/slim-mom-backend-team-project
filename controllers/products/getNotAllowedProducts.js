@@ -9,4 +9,4 @@ const getNotAllowedProducts = async bloodType => {
     return products;
 };
 
-export default getNotAllowedProducts;
+module.exports = getNotAllowedProducts;

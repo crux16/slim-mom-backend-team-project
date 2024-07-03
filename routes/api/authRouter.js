@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/signup", validation(joiSignupSchema), ctrlWrapper(ctrl.signup));
 router.post("/login", validation(joiLoginSchema), ctrlWrapper(ctrl.login));
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
-router.patch("/infouser", auth, validation(joiUpdateDailyRateSchema), ctrlWrapper(ctrl.updateById));
+router.put("/infouser", auth, validation(joiUpdateDailyRateSchema), ctrlWrapper(ctrl.updateById));
 router.post("/logout", auth, ctrlWrapper(ctrl.logout));
 
 module.exports = router;
