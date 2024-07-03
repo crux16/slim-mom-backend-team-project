@@ -305,10 +305,20 @@
         }
       }
     },
-    "/api/myProducts/6683f213e6e1718608cd2437": {
+    "/api/myProducts/{productId}": {
       "delete": {
         "tags": [
           "default"
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
         ],
         "summary": "DeleteProduct",
         "description": "Delete the product of the current user",
