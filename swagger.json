@@ -1,0 +1,386 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Slimmom",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "noauthAuth": {
+        "type": "http",
+        "scheme": "noauth"
+      }
+    }
+  },
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Signup",
+        "description": "Use for sign up registration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Josh Matela",
+                  "email": "joshie@mail.com",
+                  "password": "P@ssw0rd123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Login",
+        "description": "User login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "josh@mail.com",
+                  "password": "P@ssw0rd123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Logout",
+        "description": "User logout",
+        "requestBody": {
+          "content": {}
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/products/searchProducts": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "SearchProducts",
+        "description": "Search products from the database by query",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Am"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Current",
+        "description": "User current status or information",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/myProducts/listMyProduct": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "ListMyProducts",
+        "description": "This will fetch the products that has been added by add product endpoint",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "date": "02.07.2024"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/products": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Public Calculate",
+        "description": "Use for calculating the daily calorie intake and a list of non-recommended food",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "age": "18",
+                  "bloodType": "3",
+                  "currentWeight": "44",
+                  "desiredWeight": "55",
+                  "height": "156"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "noauthAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/products/{userId}": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Private Calculate (User ID)",
+        "description": "Use for calculating the daily calorie intake and a list of non-recommended food for registered user. User ID can be found in the ListMyProducts endpoint and map the owner to fetch the ID",
+        "requestBody": {
+          "content": {}
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/myProducts/addProduct": {
+      "post": {
+        "tags": [
+          "default"
+        ],
+        "summary": "AddProduct",
+        "description": "Add product and it will added to the list of the current user's product",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "productName": "Amaranth",
+                  "productWeight": "20",
+                  "date": "{{timestamp}}"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/myProducts/6683f213e6e1718608cd2437": {
+      "delete": {
+        "tags": [
+          "default"
+        ],
+        "summary": "DeleteProduct",
+        "description": "Delete the product of the current user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/infouser": {
+      "put": {
+        "tags": [
+          "default"
+        ],
+        "summary": "Infouser",
+        "description": "Use for updating the summary of the user's calories and the list of non-recommended food",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "age": "18",
+                  "bloodType": "3",
+                  "currentWeight": "44",
+                  "desiredWeight": "55",
+                  "height": "156",
+                  "dailyRate": 1274,
+                  "notAllowedProducts": [
+                    "Dried lentils",
+                    "Peanut butter PB2 dry skimmed",
+                    "Peanut butter",
+                    "Lentils (sprouts)",
+                    "red lentils"
+                  ],
+                  "notAllowedProductsAll": [
+                    "Peanut butter PB2 dry skimmed",
+                    "Peanut butter",
+                    "Lentils (sprouts)",
+                    "Dried lentils",
+                    "red lentils",
+                    "Canned Bonduelle Lentils",
+                    "Lentils boiled"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
