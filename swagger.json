@@ -35,9 +35,9 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "name": "Josh Matela",
-                  "email": "joshie@mail.com",
-                  "password": "P@ssw0rd123"
+                  "name": "Example Name",
+                  "email": "example@mail.com",
+                  "password": "examplepassword"
                 }
               }
             }
@@ -66,8 +66,8 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "email": "josh@mail.com",
-                  "password": "P@ssw0rd123"
+                  "email": "example@mail.com",
+                  "password": "examplepassword"
                 }
               }
             }
